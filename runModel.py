@@ -14,7 +14,6 @@ def store_papername(name, row_number):
 def store_probable(data, row_number):
     col = 2
     for i in range(0,number_of_topics):
-        insert = data[i]
         ws.cell(column = col+i, row=row_number, value=str(data[i]))
 
 def main():
