@@ -14,13 +14,23 @@ def store_papername(name, row_number):
 def store_probable(data, row_number):
     col = 2
     for i in range(0,number_of_topics):
-        ws.cell(column = col+i, row=row_number, value=str(data[i]))
+        if(len(data) != 0):
+            ws.cell(column = col+i, row=row_number, value=str(data[i]))
+        else:
+            pass
 
 def main():
-    top_directory = '/home/magnus/Textfiles/TestForExporting'
+#<<<<<<< Updated upstream
+#    top_directory = '/home/magnus/Textfiles/TestForExporting'
+#    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+#    dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
+#    lda = gensim.models.LdaModel.load('/home/magnus/Textfiles/TrainedModel/trained_model.lda')
+#=======
+    top_directory = '/home/jonathan/Documents/Stuff/FixedLemmatizedHang'
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-    dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
-    lda = gensim.models.LdaModel.load('/home/magnus/Textfiles/TrainedModel/trained_model.lda')
+    #dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
+    lda = gensim.models.LdaModel.load('/home/jonathan/Documents/Stuff/Models/hangsomething.lda')
+#>>>>>>> Stashed changes
     #lda.print_topics(num_topics=100, num_words=7)
     lda.print_topics(num_topics=100, num_words=7)
     row_number = 1
@@ -35,7 +45,8 @@ def main():
             document = word_tokenize(document)
             bow = lda.id2word.doc2bow(document)
             topic_analysis = lda[bow]
-	    sorted_analysis = sorted(topic_analysis, key = lambda x: x[1], reverse=True)
+            sorted_analysis = sorted(topic_analysis, key = lambda x: x[1], reverse=True)
+            print("WE HAVE CAR!", sorted_analysis)
             store_probable(sorted_analysis, row_number)
             row_number = row_number+1
             print(topic_analysis)
