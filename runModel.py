@@ -43,7 +43,7 @@ def main():
             bow = lda.id2word.doc2bow(document)
             topic_analysis = lda[bow]
             sorted_analysis = sorted(topic_analysis, key = lambda x: x[1], reverse=True)
-            print("WE HAVE CAR!", sorted_analysis)
+            print(sorted_analysis)
             store_probable(sorted_analysis, row_number)
             row_number = row_number+1
             print(topic_analysis)
