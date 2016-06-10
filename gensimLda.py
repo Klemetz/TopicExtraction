@@ -1,3 +1,9 @@
+#This program creates an LDA model through the gensim framework on a given corpus.
+#Copyright (C) 2016 Magnus Johansson <magnusjohansson82(at@)gmail(dot.)com> (Enekullegatan 12, 418 75 Göteborg), Jonathan Klemetz <jonathanklemetz(at@)gmail(dot.)com> (Färgfabriksgatan 18, 417 24 Göteborg)
+#This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
 import gensim, os, bz2, inspect, logging
 from gensim import corpora, models, similarities
 

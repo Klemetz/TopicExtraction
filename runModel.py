@@ -1,3 +1,10 @@
+#This program will run a saved model on the given corpus and return which topics are relevant for each paper.
+#Copyright (C) 2016 Magnus Johansson <magnusjohansson82(at@)gmail(dot.)com> (Enekullegatan 12, 418 75 Göteborg), Jonathan Klemetz <jonathanklemetz(at@)gmail(dot.)com> (Färgfabriksgatan 18, 417 24 Göteborg)
+#This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+#You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+
 import gensim, os, bz2, inspect, logging, sys
 from gensim import corpora, models, similarities
 from nltk import word_tokenize
@@ -20,18 +27,10 @@ def store_probable(data, row_number):
             pass
 
 def main():
-#<<<<<<< Updated upstream
-#    top_directory = '/home/magnus/Textfiles/TestForExporting'
-#    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-#    dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
-#    lda = gensim.models.LdaModel.load('/home/magnus/Textfiles/TrainedModel/trained_model.lda')
-#=======
     top_directory = '/home/jonathan/Documents/Stuff/FixedLemmatizedHang'
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-    #dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
+
     lda = gensim.models.LdaModel.load('/home/jonathan/Documents/Stuff/Models/hangsomething.lda')
-#>>>>>>> Stashed changes
-    #lda.print_topics(num_topics=100, num_words=7)
     lda.print_topics(num_topics=100, num_words=7)
     row_number = 1
     for root, dirs, files in os.walk(top_directory):
@@ -39,8 +38,6 @@ def main():
             store_papername(file, row_number)
             print(file)
             originalString = open(os.path.join(root, file)).read()
-            #originalString = originalString.lower()
-            #originalString = unicode(originalString, 'utf-8')
             document = originalString
             document = word_tokenize(document)
             bow = lda.id2word.doc2bow(document)
