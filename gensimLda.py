@@ -13,17 +13,17 @@ class MyCorpus(object):
         self.top_dir = top_dir
         self.dictionary = gensim.corpora.Dictionary(iter_documents(top_dir))
         #self.dictionary.filter_extremes(no_below=1, keep_n=30000) # check API docs for pruning params
-        self.dictionary.save('/tmp/deerwester.dict')
+        self.dictionary.save('/tmp/hangdeerwester.dict')
 
     def __iter__(self):
         for tokens in iter_documents(self.top_dir):
             yield self.dictionary.doc2bow(tokens)
 
 def main():
-    top_directory = '/home/jonathan/Documents/Stuff/TrainingLem'
+    top_directory = '/home/jonathan/Documents/Stuff/FixedTrainingLemHang'
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     corpus = MyCorpus(top_directory) #Creates a MyCorpus object, containing all the documents
-    dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
+    dictionary = corpora.Dictionary.load('/tmp/hangdeerwester.dict')
 
     # Not entierly sure what this is doing, but it was necessary to create a proper corpus object.
     # I think this is because that gensims algorithms require to have the corpuses stored on the hard drive.
@@ -34,7 +34,7 @@ def main():
     #lda = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=dictionary, num_topics=5, passes=10)
     lda = gensim.models.ldamulticore.LdaMulticore(corpus=corpus, id2word=dictionary, num_topics=100, passes=50, batch=True, workers=2, chunksize=3000, iterations=1000)
 
-    lda.save('/home/jonathan/Documents/Stuff/Models/something.lda')
+    lda.save('/home/jonathan/Documents/Stuff/Models/hangsomething.lda')
     print("Ending!")
 
 main()
